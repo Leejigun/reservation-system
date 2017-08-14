@@ -21,22 +21,35 @@ function extend(superClass, def) {
 
 	return extendClass;
 };
-//eg.Class.extend
-var Rolling = extend(ge.Component, {
-  init: function(){
-      
-  },
-  moveLeft: function(){
 
-  },
-  moveRight: function(){
 
+var ConvertTimestamp = eg.Class({
+  "construct" : function(timestamp){
+    this.timestamp = timestamp;
   },
-  moveWithMouse: function(){
-
+  "convert" : function(timestamp){
+    var time;
+    var d = new Date(timestamp);
+    var yyyy = d.getFullYear();
+    var mm = ('0' + (d.getMonth() + 1)).slice(-2); // Months are zero based. Add leading 0.
+    var dd = ('0' + d.getDate()).slice(-2); // Add leading 0.
+    var hh = d.getHours();
+    var h = hh;
+    var min = ('0' + d.getMinutes()).slice(-2); // Add leading 0.
+    var ampm = 'AM';
+    if (hh > 12) {
+      h = hh - 12;
+      ampm = 'PM';
+    } else if (hh === 12) {
+      h = 12;
+      ampm = 'PM';
+    } else if (hh == 0) {
+      h = 12;
+    }
+    time = yyyy + '-' + mm + '-' + dd + ', ' + h + ':' + min + ' ' + ampm;
+    return time;
   }
-
-})
+});
 
 function ImgRoller($findElement) {
   var $ulEle = $findElement.find('ul');
@@ -55,9 +68,9 @@ function ImgRoller($findElement) {
   $prev.on({
     'click': function() {
       if (clickState === false) {
-        if (currentPage > 1) {
-          currentPage--;
-          translate(currentPage);
+        if (curImage > 1) {
+          curImage--;
+          translate(curImage);
         }
       }
     }
@@ -65,8 +78,8 @@ function ImgRoller($findElement) {
   $next.on({
     'click': function() {
       if (clickState === false) {
-        if (currentPage < pages) {
-          currentPage++;
+        if (curImage < pages) {
+          curImage++;
           translate(currentPage);
         }
       }
@@ -186,13 +199,15 @@ function ImgRoller($findElement) {
   }
 
 }
-function PopUp($thumb) {
+
+var PopUp = (function(){
   var $findElement = $('.img-popup-layer.img-viewer');
   var $countElement;
   var itemSource = $('#popup-img-template').html();
   var itemTemplate = Handlebars.compile(itemSource);
   var $ulEle = $findElement.find('ul');
   var isDragging = false;
+  var $thumb;
   var curX;
   var images;
   var curImage;
@@ -208,15 +223,7 @@ function PopUp($thumb) {
     count = $th.siblings('.img_count').text();
     $countElement.text('1 / ' + count);
   }
-  $thumb.on('click', function(e) {
-    init($(this));
-    $('div.img-popup-layer').show();
-    popupImgList();
-  });
-  $('.img-popup-layer.exit').on('click', function() {
-    $('div.img-popup-layer').hide();
-    removeLi();
-  });
+
   function popupImgList() {
     $.ajax({
       type: 'GET',
@@ -311,4 +318,17 @@ function PopUp($thumb) {
       e.preventDefault();
     }
   }
-}
+
+  return function($thumb) {
+    this.$thumb = $thumb;
+    $thumb.on('click', function(e) {
+      init($(this));
+      $('div.img-popup-layer').show();
+      popupImgList();
+    });
+    $('.img-popup-layer.exit').on('click', function() {
+      $('div.img-popup-layer').hide();
+      removeLi();
+    });
+  }
+})();

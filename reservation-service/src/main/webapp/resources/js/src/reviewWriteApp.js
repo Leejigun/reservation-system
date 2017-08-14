@@ -11,13 +11,12 @@ requirejs.config({
         // is using jQuery 1.9.0 located at
         // js/lib/jquery-1.9.0.js, relative to
         // the HTML page.
-        handlebars: 'node_modules/handlebars/dist/handlebars.min',
-        eg: 'node_modules/'
+        handlebars: 'node_modules/handlebars/dist/handlebars.min'
     }
 });
+requirejs([])
 requirejs(['jquery', 'handlebars'], function($, handlebarsjs) {
       'use strict';
-
       var headModule = (function() {
           $('.fn-backward1').on('click', function(e) {
               e.preventDefault();
@@ -131,3 +130,5 @@ requirejs(['jquery', 'handlebars'], function($, handlebarsjs) {
           });
       });
   });
+
+

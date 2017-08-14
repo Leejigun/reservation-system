@@ -6,8 +6,7 @@
   $(document).ready(function() {
     CategoryModule.initProducts();
   });
-   
-  
+
 
   //promotion slide 영역
   var imageRoller = (function() {
