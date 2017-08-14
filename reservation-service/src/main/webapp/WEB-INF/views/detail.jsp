@@ -60,13 +60,13 @@
 				<div class="section_visual">
 					<header>
 						<h1 class="logo">
-							<a href="//naver.com" class="lnk_logo" title="네이버"> <span
+							<a href="http://naver.com" class="lnk_logo" title="네이버"> <span
 								class="spr_bi ico_n_logo">네이버</span>
 							</a> <a href="/" class="lnk_logo" title="예약"> <span
 								class="spr_bi ico_bk_logo">예약</span>
 							</a>
 						</h1>
-						<a href="#" class="btn_my"> <span title="내 예약">MY</span>
+						<a href="/myreservation" class="btn_my"> <span title="내 예약">MY</span>
 						</a>
 					</header>
 					<script id="product-image-template" type="text/x-handlebars-template">
@@ -248,7 +248,7 @@
 					</div>
 					</script>
 					
-					<a class="btn_review_more" href="#"> <span>예매자 한줄평 더보기</span> <i
+					<a class="btn_review_more" href="reviews"> <span>예매자 한줄평 더보기</span> <i
 						class="fn fn-forward1"></i>
 					</a>
 					</div>
@@ -279,46 +279,51 @@
 											<li class="in_img_lst"><img alt="" class="img_thumb"
 												src="https://ssl.phinf.net/naverbooking/20170131_238/14858250829398Pnx6_JPEG/%B0%F8%C1%F6%BB%E7%C7%D7.jpg?type=a1000">
 											</li>
-										</ul></li>
+										</ul>
+									</li>
 									<li class="detail_info_lst"><strong class="in_tit">[공연정보]</strong>
 										<ul class="in_img_group">
 											<li class="in_img_lst"><img alt="" class="img_thumb"
 												data-lazy-image="https://ssl.phinf.net/naverbooking/20170131_255/1485825099482NmYMe_JPEG/%B0%F8%BF%AC%C1%A4%BA%B8.jpg?type=a1000">
 											</li>
-										</ul></li>
+										</ul>
+									</li>
 								</ul>
 							</div>
 						</div>
 					</div>
 					<!-- [D] 오시는길 외 다른 탭 선택 시 detail_location에 hide 추가 -->
-					<div class="detail_location"style="display:none;">
+					<div class="detail_location hide">
 						<div class="box_store_info no_topline">
-							<a href="#" class="store_location" title="지도웹으로 연결"> <img
-								class="store_map img_thumb" alt="map"
-								src="https://simg.pstatic.net/static.map/image?version=1.1&amp;crs=EPSG:4326&amp;baselayer=bl_vc_bg&amp;exception=xml&amp;scale=2&amp;caller=mw_smart_booking&amp;overlayers=ol_vc_an&amp;center=127.0011948,37.5717079&amp;markers=type,default2,127.0011948,37.5717079&amp;level=11&amp;w=340&amp;h=150">
-								<span class="img_border"></span> <span class="btn_map"><i
-									class="spr_book2 ico_mapview"></i></span>
-							</a>
+							<div id='map' style="width:100%;height:300px;">
+								<a href="#" class="store_location" title="지도웹으로 연결"> <img
+									class="store_map img_thumb" alt="map"
+									src="https://simg.pstatic.net/static.map/image?version=1.1&amp;crs=EPSG:4326&amp;baselayer=bl_vc_bg&amp;exception=xml&amp;scale=2&amp;caller=mw_smart_booking&amp;overlayers=ol_vc_an&amp;center=127.0011948,37.5717079&amp;markers=type,default2,127.0011948,37.5717079&amp;level=11&amp;w=340&amp;h=150">
+									<span class="img_border"></span> <span class="btn_map"><i
+										class="spr_book2 ico_mapview"></i></span>
+								</a>
+							</div>
+							<script id="map-description-template" type="text/x-handlebars-template">
 							<h3 class="store_name">엔에이치엔티켓링크(주)</h3>
 							<div class="store_info">
 								<div class="store_addr_wrap">
 									<span class="fn fn-pin2"></span>
-									<p class="store_addr store_addr_bold">서울특별시 종로구 종로33길 15</p>
+									<p class="store_addr store_addr_bold">{{place_street}}</p>
 									<p class="store_addr">
-										<span class="addr_old">지번</span> <span class="addr_old_detail">서울특별시
-											종로구 연지동 270 </span>
+										<span class="addr_old">지번</span> <span class="addr_old_detail">{{place_lot}}</span>
 									</p>
-									<p class="store_addr addr_detail">두산아트센터 연강홀</p>
+									<p class="store_addr addr_detail">{{place_name}}</p>
 								</div>
 								<div class="lst_store_info_wrap">
 									<ul class="lst_store_info">
 										<li class="item"><span class="item_lt"> <i
 												class="fn fn-call2"></i> <span class="sr_only">전화번호</span>
-										</span> <span class="item_rt"> <a href="tel:02-548-0597"
-												class="store_tel">02-548-0597</a></span></li>
+										</span> <span class="item_rt"> <a href="tel:{{tel}}"
+												class="store_tel">{{tel}}</a></span></li>
 									</ul>
 								</div>
 							</div>
+							</script>
 							<!-- [D] 모바일 브라우저에서 접근 시 column2 추가와 btn_navigation 요소 추가 -->
 							<div class="bottom_common_path column2">
 								<a href="#" class="btn_path"> <i class="fn fn-path-find2"></i>
@@ -356,14 +361,15 @@
 			</ul>
 		
 	</div>
+	</script>
 </body>
-</script>
 
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=8bYQ0yuErj7kN82FyW8m&submodules=geocoder"></script>
 <script src="/resources/js/node_modules/jquery/dist/jquery.js"></script>
 <script src="/resources/js/node_modules/handlebars/dist/handlebars.js"></script>
 <script src="/resources/js/node_modules/@egjs/component/dist/component.js"></script>
 <script src="/resources/js/handlebarsModule.js"></script>
-<script src="/resources/js/flicking.js"></script>
+<script src="/resources/js/Flicking.js"></script>
  <script src="/resources/js/detail.js"></script>
 
 

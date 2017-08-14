@@ -17,17 +17,17 @@
         <div class="header fade">
             <header class="header_tit">
                 <h1 class="logo">
-                    <a href="#" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-                    <a href="#" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+                    <a href="http://naver.com" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
+                    <a href="/mainpage" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                 </h1>
-                <a href="#" class="btn_my"> <span title="내 예약">MY</span> </a>
+                <a href="/myreservation" class="btn_my"> <span title="내 예약">MY</span> </a>
             </header>
         </div>
         <div class="ct">
             <div class="ct_wrap">
                <script id="product-reservDetail-template" type="text/forHandlebars">
                 <div class="top_title">
-                    <a href="#" class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
+                    <a href="/productDetail/{{id}}" class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
                     <h2><span class="title">{{name}}</span></h2>
                 </div>
                 <div class="group_visual">
@@ -93,6 +93,8 @@
                         {{/each}}
                     </div>
                 </div>
+			</script>
+			<script id="booker-info-template" type="text/forHandlebars">
                 <div class="section_booking_form">
                     <div class="booking_form_wrap">
                         <div class="form_wrap">
@@ -100,7 +102,7 @@
                             <div class="agreement_nessasary help_txt"> <span class="spr_book ico_nessasary"></span> <span>필수입력</span> </div>
                             <form class="form_horizontal">
                                 <div class="inline_form"> <label class="label" for="name"> <span class="spr_book ico_nessasary">필수</span> <span class="valid">예매자</span> </label>
-                                    <div class="inline_control"> <input type="text" name="name" id="name" class="text" value="{{user.name}}" maxlength="17"> </div>
+                                    <div class="inline_control"> <input type="text" name="name" id="name" class="text" value="{{user.username}}" maxlength="17"> </div>
                                 </div>
                                 <div class="inline_form"> <label class="label" for="tel"> <span class="spr_book ico_nessasary">필수</span> <span>연락처</span> </label>
                                     <div class="inline_control"> <input type="tel" name="tel" id="tel" class="tel" value="" placeholder="휴대폰 입력 시 예매내역 문자발송"> </div>
@@ -116,7 +118,8 @@
                             </form>
                         </div>
                     </div>
-                    </script>
+			</script>
+                    
                     <div class="section_booking_agreement">
                         <div class="agreement all"> <input type="checkbox" id="chk3" class="chk_agree"> <label for="chk3" class="label chk_txt_label"> <span>이용자 약관 전체동의</span> </label>
                             <div class="agreement_nessasary">
@@ -155,11 +158,7 @@
         </div>
     </footer>
 </body>
-<script src="/resources/js/node_modules/jquery/dist/jquery.js"></script>
-<script src="/resources/js/node_modules/handlebars/dist/handlebars.js"></script>
-<script src="/resources/js/handlebarsModule.js"></script>
-<script src="/resources/js/node_modules/@egjs/component/dist/component.js"></script>
-<script src="/resources/js/init.js"></script>
-<script src="/resources/js/reservComponent.js"></script>
-<script src="/resources/js/reserv.js"></script>
+<script data-main="/resources/js/reserv.js" src="/resources/js/node_modules/requirejs/require.js"></script>
+
+
 </html>
