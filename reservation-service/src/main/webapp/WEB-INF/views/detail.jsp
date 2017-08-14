@@ -22,7 +22,7 @@
 					class="spr_bi ico_bk_logo">예약</span>
 				</a>
 			</h1>
-			<a href="/login" class="btn_my"> <span
+			<a href="/myreservation" class="btn_my"> <span
 				title="내 예약">MY</span>
 			</a> </header>
 		</div>
@@ -37,7 +37,7 @@
 							class="spr_bi ico_bk_logo">예약</span>
 						</a>
 					</h1>
-					<a href="/login" class="btn_my"> <span
+					<a href="/myreservation" class="btn_my"> <span
 						title="내 예약">MY</span>
 					</a> </header>
 					<div class="pagination">
@@ -53,7 +53,7 @@
                   <script id="main-images-template" type="text/x-handlebars-template">
                   {{#each this}}
                   <li class="item" style="width: 414px;">
-                    <img alt="" class="img_thumb" src="/api/files/{{this}}">
+                    <img alt="" class="img_thumb" src="/api/images//{{this}}">
                     <span class="img_bg"></span>
                     <div class="visual_txt">
                       <div class="visual_txt_inn">
@@ -148,7 +148,7 @@
 											<div class="thumb_area">
 												<a href="#" class="thumb" title="이미지 크게 보기">
 													<img width="90" height="90" class="img_vertical_top"
-													src="/api/files/{{fileId}}"
+													src="/api/images//{{fileId}}"
 													alt="리뷰이미지">
 												</a> <span class="img_count">{{filesNum}}</span>
 											</div>
@@ -200,7 +200,7 @@
 									<li class="detail_info_lst"><strong class="in_tit">[상세정보]</strong>
 										<ul class="in_img_group">
 											<li class="in_img_lst">
-												<img alt="" class="img_thumb" data-lazy-image="/api/files/{{this}}">
+												<img alt="" class="img_thumb" data-lazy-image="/api/images//{{this}}">
 											</li>
 										</ul>
 									</li>
@@ -213,7 +213,7 @@
 					<div class="detail_location hide">
 						<div class="box_store_info no_topline">
 							<a href="#" class="store_location" title="지도웹으로 연결">
-								<div id="map" style="width:374px;height:200px;"></div>
+								<div id="map" style="width:374px;max-width:100%;height:200px;"></div>
 								<span class="img_border"></span>
 								<span class="btn_map"><i class="spr_book2 ico_mapview"></i></span>
 							</a>
@@ -284,16 +284,13 @@
 			<script id="photo-viewer-template" type="text/x-handlebars-template">
 			{{#each this}}
 			<li style="display:inline-block; width:100%; height:100%; text-align:center;">
-				<img src="/api/files/{{this}}" style="max-width:100%; max-hegiht:100%;">
+				<img src="/api/images/{{this}}" style="max-width:100%; max-hegiht:100%;">
 			</li>
 			{{/each}}
 			</script>
 	</div>
-	<script src="/resources/js/node_modules/jquery/dist/jquery.js"></script>
-	<script src="/resources/js/node_modules/handlebars/dist/handlebars.js"></script>
-	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=zRCp4iB_1dQ7hvpSdfYB&submodules=geocoder"></script>
-	<script src="/resources/js/flicking.js"></script>
-	<script src="/resources/js/lazy.js"></script>
-	<script src="/resources/js/detail.js"></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=${clientId}&submodules=geocoder"></script>
+	<script data-main="/resources/js/detail.js"
+	 src="/resources/js/node_modules/requirejs/require.js"></script>
 </body>
 </html>

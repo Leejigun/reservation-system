@@ -2,37 +2,47 @@ package com.ys.reservation.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ys.reservation.dao.FileDao;
+import com.ys.reservation.dao.CategoryDao;
+import com.ys.reservation.dao.ImageDao;
 import com.ys.reservation.dao.PriceDao;
 import com.ys.reservation.dao.ProductDao;
+import com.ys.reservation.dao.ReservationDao;
 import com.ys.reservation.dao.UserCommentDao;
-import com.ys.reservation.domain.FileDomain;
+import com.ys.reservation.domain.Image;
 import com.ys.reservation.domain.Price;
 import com.ys.reservation.domain.Product;
+import com.ys.reservation.vo.CommentImageVo;
 import com.ys.reservation.vo.CommentsSummaryVo;
 import com.ys.reservation.vo.DisplayInfoVo;
 import com.ys.reservation.vo.ProductDetailVo;
-import com.ys.reservation.vo.ProductReservationInfoVo;
+import com.ys.reservation.vo.ProductReservationVo;
 import com.ys.reservation.vo.ProductVo;
 import com.ys.reservation.vo.UserCommentVo;
 
 @Service
 public class ProductService {
 	private ProductDao productDao;
-	private FileDao fileDao;
+	private CategoryDao categoryDao;
+	private ImageDao imageDao;
 	private UserCommentDao userCommentDao;
 	private PriceDao priceDao;
+	private ReservationDao reservationDao;
 	
 	@Autowired
-	public ProductService(ProductDao productDao, FileDao fileDao, UserCommentDao userCommentDao, PriceDao priceDao) {
+	public ProductService(ProductDao productDao, CategoryDao categoryDao, ImageDao imageDao,
+			UserCommentDao userCommentDao, PriceDao priceDao, ReservationDao reservationDao) {
 		this.productDao = productDao;
-		this.fileDao = fileDao;
+		this.categoryDao = categoryDao;
+		this.imageDao = imageDao;
 		this.userCommentDao = userCommentDao;
 		this.priceDao = priceDao;
+		this.reservationDao = reservationDao;
 	}
 
 	public List<ProductVo> getAll() {
@@ -47,7 +57,7 @@ public class ProductService {
 		return productDao.selectLimited(offset);
 	}
 	
-	public Product getById(int id) {
+	public Product get(int id) {
 		if(id < 1) {
 			return null;
 		}
@@ -70,7 +80,7 @@ public class ProductService {
 		if(categoryId < 1) {
 			return -1;
 		}
-		return productDao.countByCategoryId(categoryId);
+		return categoryDao.countProducts(categoryId);
 	}
 	
 	public ProductDetailVo getDetailById(int id) {
@@ -80,14 +90,18 @@ public class ProductService {
 		return productDao.selectDetail(id);
 	}
 	
-	public List<Integer> getFileIds(int id, int type) {
+	public List<Integer> getImageIds(int id, int type) {
 		if(id < 1 || type < 0) {
 			return null;
 		}
 		List<Integer> ids = new ArrayList<>();
-		for(FileDomain fileDomain : productDao.selectFiles(id, type)) {
-			ids.add(fileDomain.getId());
+		List<Image> images = imageDao.selectByProductId(id, type);
+		if(images == null) {
+			return null;
 		}
+		images.stream().forEach(image -> {
+			ids.add(image.getId());
+		});
 		return ids;
 	}
 	
@@ -102,32 +116,40 @@ public class ProductService {
 		if(id < 1) {
 			return -1;
 		}
-		return fileDao.selectMainImageId(id);
+		return imageDao.selectMainImageId(id);
 	}
 	
 	public int getSubImageId(int id) {
 		if(id < 1) {
 			return -1;
 		}
-		return fileDao.selectSubImage(id).getId();
+		return imageDao.selectSubImage(id).getId();
 	}
 	
-	public List<UserCommentVo> getUserComment(int id) {
-		if(id < 1) {
+	public List<UserCommentVo> getLimitedUserComment(int id, int page, int limit) {
+		if (id < 1 || page < 0 || (limit != 3 && limit != 10)) {
 			return null;
 		}
-		List<UserCommentVo> comments = productDao.selectUserComment(id);
+
+		int offset = (page-1) * limit;
+		List<UserCommentVo> comments = userCommentDao.selectLimitedByProductId(id, offset, limit);
+		if(comments == null || comments.size() == 0) {
+			return null;
+		}
+
+		List<Integer> ids = comments.stream().map(c -> c.getId()).collect(Collectors.toList());
+		List<CommentImageVo> commentImageList = imageDao.selectIdByCommentIds(ids);
+		Map<Integer, List<Integer>> commentImageMap = commentImageList.stream()
+				.collect(Collectors.groupingBy(CommentImageVo::getCommentId, 
+						Collectors.mapping(CommentImageVo::getFileId, Collectors.toList())));
 		for(UserCommentVo comment : comments) {
-			List<FileDomain> files = userCommentDao.selectFiles(comment.getId());
-			if(files.size() > 0) {
-				comment.setFileId(files.get(0).getId());
-				comment.setFilesNum(files.size());
+			List<Integer> imageList = commentImageMap.get(comment.getId());
+			if(imageList != null) {
+				comment.setImageId(imageList.get(0));
+				comment.setImagesNum(imageList.size());
 			}
-			
 		}
-		if(comments.size() > 3) {
-			return comments.subList(0, 3);
-		}
+
 		return comments;
 	}
 	
@@ -135,14 +157,14 @@ public class ProductService {
 		if(id < 1) {
 			return null;
 		}
-		return productDao.selectAvgCommentScore(id);
+		return userCommentDao.selectAvgScoreByProductId(id);
 	}
 	
-	public ProductReservationInfoVo getReservationInfo(int id) {
+	public ProductReservationVo getReservation(int id) {
 		if(id < 1) {
 			return null;
 		}
-		return productDao.selectReservationInfo(id);
+		return reservationDao.selectByProductId(id);
 	}
 	
 	public List<Price> getPrices(int id) {

@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import com.ys.reservation.dao.sqls.CategorySqls;
+import com.ys.reservation.dao.sqls.ProductSqls;
 import com.ys.reservation.domain.Category;
 
 @Repository
@@ -39,7 +40,13 @@ public class CategoryDao {
 		return jdbc.query(CategorySqls.SELECT_ALL, rowMapper);
 	}
 	
-	public int delete(Integer id) { //객체 생성 메모리 릭
+	public Integer countProducts(int categoryId) {
+		Map<String, ?> params = Collections.singletonMap("categoryId", categoryId);
+		return DaoUtil.getFirstOrNull(jdbc, 
+				ProductSqls.COUNT_BY_CATEGORY_ID, params, Integer.class);
+	}
+	
+	public int delete(int id) {
 		Map<String, ?> params = Collections.singletonMap("id", id);
 		return jdbc.update(CategorySqls.DELETE_BY_ID, params);
 	}

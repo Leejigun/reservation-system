@@ -27,4 +27,9 @@ public class PriceDao {
 		Map<String, ?> params = Collections.singletonMap("id", id);
 		return jdbc.query(PriceSqls.SELECT_BY_PRODUCT_ID, params, priceRowMapper);
 	}
+
+	public List<Price> selectByProductIds(List<Integer> ids) {
+		Map<String, ?> params = Collections.singletonMap("ids", ids);
+		return jdbc.query(PriceSqls.SELECT_BY_PRODUCT_IDS, params, priceRowMapper);
+	}
 }

@@ -19,21 +19,21 @@
                   <a href="/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
                   <a href="/" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
               </h1>
-              <a href="/my/reservation" class="btn_my"> <span title="내 예약">MY</span> </a>
+              <a href="/myreservation" class="btn_my"> <span title="내 예약">MY</span> </a>
           </header>
       </div>
       <div class="ct">
           <div class="ct_wrap">
               <script id="reservation-info-template" type="text/x-handlebars-template">
               <div class="top_title">
-                  <a href="#" class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
+                  <a href="#" onClick="history.back()" class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
                   <h2><span class="title">{{name}}</span></h2>
               </div>
               <div class="group_visual">
                   <div class="container_visual" style="width: 414px;">
                       <ul class="visual_img">
                           <li class="item" style="width: 414px;">
-                            <img class="img_thumb" src="/api/files/{{imgId}}">
+                            <img class="img_thumb" src="/api/images/{{imgId}}">
                             <span class="img_bg"></span>
                             <div class="preview_txt">
                               <h2 class="preview_txt_tit">{{name}}</h2>
@@ -137,9 +137,7 @@
           <span class="copyright">© NAVER Corp.</span>
       </div>
   </footer>
-	<script src="/resources/js/node_modules/jquery/dist/jquery.js"></script>
-	<script src="/resources/js/node_modules/handlebars/dist/handlebars.js"></script>
-  <script src="/resources/js/node_modules/@egjs/component/dist/component.js"></script>
-  <script src="/resources/js/reserve.js"></script>
+    <script data-main="/resources/js/reserve.js"
+  	 src="/resources/js/node_modules/requirejs/require.js"></script>
 </body>
 </html>
