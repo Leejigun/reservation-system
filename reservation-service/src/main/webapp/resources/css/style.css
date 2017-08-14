@@ -16,6 +16,11 @@
     font-style: normal
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> B_SungJiHyun_bb
 /*
 레이어 팝업 css
 */
@@ -50,6 +55,10 @@ a.nbtn {display:inline-block; height:25px; padding:0 14px 0; border:3px solid #1
 }
 /**/
 
+<<<<<<< HEAD
+=======
+>>>>>>> ae6340164f99cdd21200e3f520303683ca31338f
+>>>>>>> B_SungJiHyun_bb
 .fn {
     display: inline-block;
     height: 1em
@@ -1052,10 +1061,13 @@ button {
     min-width: 410px
 }
 
+<<<<<<< HEAD
+=======
 .invisible{
     display: none;
 }
 
+>>>>>>> ae6340164f99cdd21200e3f520303683ca31338f
 .img_bg,.img_bg:after,.img_bg:before {
     top: 0;
     bottom: 0;

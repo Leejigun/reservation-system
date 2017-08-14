@@ -12,6 +12,10 @@
     <script type="text/javascript" src="/resources/lib/handlebars.min.js"></script>
     <script type="text/javascript" src="/resources/lib/jquery.min.js"></script>
     <script type="text/javascript" src="/resources/lib/component.min.js"></script>
+<<<<<<< HEAD
+=======
+    <script type="text/javascript" src="/resources/js/util.js"></script>
+>>>>>>> B_SungJiHyun_bb
 </head>
 
 <script id="price-template" type="text/x-handlebars-template">
@@ -89,26 +93,45 @@
                         </p>
                         <h3 class="in_tit">요금</h3>
                         <p class="dsc">
+<<<<<<< HEAD
                             성인(만 19~64세) 5,000원 / 청소년(만 13~18세) 4,000원<br> 어린이(만 4~12세) 3,000원 / 20인 이상 단체 20% 할인<br> 국가유공자, 장애인, 65세 이상 4,000원
+=======
+                            <%-- 성인(만 19~64세) 5,000원 / 청소년(만 13~18세) 4,000원<br> 어린이(만 4~12세) 3,000원 / 20인 이상 단체 20% 할인<br> 국가유공자, 장애인, 65세 이상 4,000원 --%>
+>>>>>>> B_SungJiHyun_bb
                         </p>
                     </div>
                 </div>
                 <div class="section_booking_ticket">
                     <div class="ticket_body">
+<<<<<<< HEAD
                         <%-- <div class="qty">
                             <div class="count_control">
                                 <!-- [D] 수량이 최소 값이 일때 ico_minus3, count_control_input에 disabled 각각 추가, 수량이 최대 값일 때는 ico_plus3에 disabled 추가 -->
                                 <div class="clearfix">
                                     <a href="#" class="btn_plus_minus spr_book2 ico_minus3 disabled" title="빼기"> </a> <input type="tel" class="count_control_input disabled" value="0" readonly title="수량">
                                     <a href="#" class="btn_plus_minus spr_book2 ico_plus3" title="더하기">
+=======
+                         <%-- <div class="qty">
+                            <div class="count_control">
+                                <!-- [D] 수량이 최소 값이 일때 ico_minus3, count_control_input에 disabled 각각 추가, 수량이 최대 값일 때는 ico_plus3에 disabled 추가 -->
+                                <div class="clearfix">
+                                    <a  class="btn_plus_minus spr_book2 ico_minus3 disabled" title="빼기"> </a>
+                                    <input type="tel" class="count_control_input disabled" value="0" readonly title="수량">
+                                    <a class="btn_plus_minus spr_book2 ico_plus3" title="더하기">
+>>>>>>> B_SungJiHyun_bb
                                     </a>
                                 </div>
                                 <!-- [D] 금액이 0 이상이면 individual_price에 on_color 추가 -->
                                 <div class="individual_price"><span class="total_price">123,000</span><span class="price_type">원</span></div>
                             </div>
                             <div class="qty_info_icon"> <strong class="product_amount"> <span>성인</span> </strong> <strong class="product_price"> <span class="price">10,200</span> <span class="price_type">원</span> </strong> <em class="product_dsc">10,200원 (15% 할인가)</em> </div>
+<<<<<<< HEAD
                         </div>
                         <div class="qty">
+=======
+                        </div> --%>
+<%--                        <div class="qty">
+>>>>>>> B_SungJiHyun_bb
                             <div class="count_control">
                                 <div class="clearfix">
                                     <a href="#" class="btn_plus_minus spr_book2 ico_minus3" title="빼기"> </a> <input type="tel" class="count_control_input" value="10" readonly title="수량">
@@ -145,18 +168,30 @@
                 </div>
                 <div class="section_booking_form">
                     <div class="booking_form_wrap">
+<<<<<<< HEAD
                         <div class="form_wrap">
+=======
+                        <div class="form_wrap" data-userid="${sessionScope.user.id}">
+>>>>>>> B_SungJiHyun_bb
                             <h3 class="out_tit">예매자 정보</h3>
                             <div class="agreement_nessasary help_txt"> <span class="spr_book ico_nessasary"></span> <span>필수입력</span> </div>
                             <form class="form_horizontal">
                                 <div class="inline_form"> <label class="label" for="name"> <span class="spr_book ico_nessasary">필수</span> <span>예매자</span> </label>
+<<<<<<< HEAD
                                     <div class="inline_control"> <input type="text" name="name" id="name" class="text" value="" placeholder="이름을 입력해주세요." maxlength="17"> </div>
+=======
+                                    <div class="inline_control"> <input type="text" name="name" id="name" class="text" value="${sessionScope.user.username}" placeholder="이름을 입력해주세요." maxlength="17"> </div>
+>>>>>>> B_SungJiHyun_bb
                                 </div>
                                 <div class="inline_form"> <label class="label" for="tel"> <span class="spr_book ico_nessasary">필수</span> <span>연락처</span> </label>
                                     <div class="inline_control"> <input type="tel" name="tel" id="tel" class="tel" value="" placeholder="휴대폰 입력 시 예매내역 문자발송"> </div>
                                 </div>
                                 <div class="inline_form"> <label class="label" for="email">  <span>이메일</span> </label>
+<<<<<<< HEAD
                                     <div class="inline_control"> <input type="email" name="email" id="email" class="email" value="" placeholder="이메일 입력 시 예매내역 메일발송" maxlength="50"> </div>
+=======
+                                    <div class="inline_control"> <input type="email" name="email" id="email" class="email" value="${sessionScope.user.email}" placeholder="이메일 입력 시 예매내역 메일발송" maxlength="50"> </div>
+>>>>>>> B_SungJiHyun_bb
                                 </div>
                                 <div class="inline_form last"> <label class="label" for="message">예매내용</label>
                                     <div class="inline_control">

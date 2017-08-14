@@ -18,17 +18,17 @@ public class ProductController {
 	@Autowired
     private ProductService productService;
 	
-	@GetMapping("/{start}/{id}") //start와
-	Map<String,Object> getLimit(@PathVariable Integer start, @PathVariable Integer id) {//변수명이 같아야함..\
-		Map<String,Object> map = new HashMap<String,Object>();
+	@GetMapping("/{start}/{id}")
+	Map<String,Object> getLimit(@PathVariable("start") Integer start, @PathVariable("id") Integer id) {
+		Map<String,Object> map = new HashMap<>();
 		map.put("count", productService.getCountId(id));
 		map.put("product", productService.getLimit(start,id));
 		return map;
 	}
 	
 	@GetMapping("/{start}")
-	Map<String,Object> readList(@PathVariable Integer start) {
-		Map<String,Object> map = new HashMap<String,Object>();
+	Map<String,Object> readList(@PathVariable("start") Integer start) {
+		Map<String,Object> map = new HashMap<>();
 		map.put("count", productService.getCountAll());
 		map.put("product", productService.getAll(start));
 		return map;

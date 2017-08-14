@@ -9,26 +9,76 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <title>네이버 예약</title>
     <link href="/resources/css/style.css" rel="stylesheet">
+<<<<<<< HEAD
 </head>
 
+=======
+
+    <script type="text/javascript" src="/resources/lib/handlebars.min.js"></script>
+    <script type="text/javascript" src="/resources/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="/resources/lib/component.min.js"></script>
+    <script type="text/javascript" src="/resources/lib/require.js"></script>
+</head>
+
+<script id="commentImage-template" type="text/x-handlebars-template">
+{{#each fileData}}
+<li class="detail_list" style="width: 414px;" style="height: 414px; ">
+    <img alt="코멘트 사진" class="detail_img_thumb" src="/files/{{fileId}}">
+</li>
+{{/each}}
+</script>
+
+<script id="comment-template" type="text/x-handlebars-template">
+    <li class="list_item" data-comment={{id}}>
+        <div>
+            <div class="review_area">
+                <div class="thumb_area">
+                    {{#if file_id}}
+                    <a class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="/files/{{file_id}}" alt="리뷰이미지"> </a> <span class="img_count">{{imgCount}}</span>                                                </div>
+                    {{else}}
+                    </div>
+                    {{/if}}
+                <h4 class="resoc_name">{{title}}</h4>
+                <p class="review">{{comment}}</p>
+            </div>
+            <div class="info_area">
+                <div class="review_info"> <span class="grade">{{score}}</span> <span class="name">{{nickname}}</span> <span class="date">{{day}} 방문</span> </div>
+            </div>
+        </div>
+    </li>
+</script>
+
+>>>>>>> B_SungJiHyun_bb
 <body>
     <div id="container">
 		<!-- [D] 예약하기로 들어오면 header에 fade 클래스 추가로 숨김 -->
 		<div class="header fade">
 			<header class="header_tit">
 				<h1 class="logo">
+<<<<<<< HEAD
 					<a href="#" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
 					<a href="#" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
 				</h1>
 				<a href="#" class="btn_my"> <span title="내 예약">MY</span> </a>
+=======
+					<a  class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
+					<a  class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+				</h1>
+				<a class="btn_my"> <span title="내 예약">MY</span> </a>
+>>>>>>> B_SungJiHyun_bb
 			</header>
 		</div>
         <div class="ct">
             <div class="wrap_review_list">
                 <div class="review_header">
                     <div class="top_title gr">
+<<<<<<< HEAD
                         <a href="#" class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
                         <h2><a class="title" href="#">오디컴퍼니 주식회사</a></h2>
+=======
+                        <a  class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
+                        <h2><a class="title" >오디컴퍼니 주식회사</a></h2>
+>>>>>>> B_SungJiHyun_bb
                     </div>
                 </div>
                 <div class="section_review_list">
@@ -37,7 +87,11 @@
                         <div class="short_review_area">
                             <div class="grade_area"> <span class="graph_mask"> <em class="graph_value" style="width: 88%;"></em> </span> <strong class="text_value"> <span>4.4</span> <em class="total">5.0</em> </strong> <span class="join_count"><em class="green">20건</em> 등록</span>                                </div>
                             <ul class="list_short_review">
+<<<<<<< HEAD
                                 <li class="list_item">
+=======
+                                <%-- <li class="list_item">
+>>>>>>> B_SungJiHyun_bb
                                     <div>
                                         <div class="review_area no_img">
                                             <h4 class="resoc_name">뮤지컬_드림걸즈(DREAMGIRLS)_최초_내한</h4>
@@ -150,7 +204,11 @@
                                             <div class="review_info"> <span class="grade">5.0</span> <span class="name">khw5****</span> <span class="date">2017.4.8. 방문</span> </div>
                                         </div>
                                     </div>
+<<<<<<< HEAD
                                 </li>
+=======
+                                </li> --%>
+>>>>>>> B_SungJiHyun_bb
                             </ul>
                         </div>
                         <p class="guide"> <i class="spr_book2 ico_bell"></i> <span>네이버 예약을 통해 실제 방문한 이용자가 남긴 평가입니다.</span> </p>
@@ -168,6 +226,32 @@
 	            <span class="copyright">© NAVER Corp.</span>
 	        </div>
 	    </footer>
+<<<<<<< HEAD
 </body>
 
 </html>
+=======
+
+        <div id="photoviwer" class="pop-layer">
+            <div class="pop-container">
+                    <div class="pop-conts">
+                            <ul class="detail_img">
+
+                            </ul>
+
+                        <div class="btn-r">
+                            <a  class="pbtn">이전</a>
+                            <a  class="nbtn">다음</a>
+                            <a  class="cbtn">Close</a>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="/resources/js/common.js"></script>
+        <script type="text/javascript" src="/resources/js/review.js"></script>
+</body>
+
+</html>
+>>>>>>> B_SungJiHyun_bb

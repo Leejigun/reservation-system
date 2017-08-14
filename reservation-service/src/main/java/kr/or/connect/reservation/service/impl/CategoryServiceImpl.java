@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.connect.reservation.dao.CategoryDao;
-import kr.or.connect.reservation.dto.Category;
+import kr.or.connect.reservation.domain.Category;
 import kr.or.connect.reservation.service.CategoryService;
 
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
-    CategoryDao categoryDao;
+    private CategoryDao categoryDao;
 
     @Transactional(readOnly = true)
 	public Category get(Long id) {
@@ -25,7 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
     
-    @Transactional(readOnly = false)
+    @Transactional
 	public Category addMember(Category category) {
 		// TODO Auto-generated method stub
 		Long insert = categoryDao.insert(category);
@@ -35,20 +35,20 @@ public class CategoryServiceImpl implements CategoryService {
 	}
     
     @Transactional(readOnly = true)
-    public Collection<Category> getAll()
+    public List<Category> getAll()
     {
     		return categoryDao.selectAll();
     }
     
-    @Transactional(readOnly = false)
-	public boolean delete(Integer id) {
+    @Transactional
+	public Boolean delete(Integer id) {
 		// TODO Auto-generated method stub
 		int affected = categoryDao.deleteById(id);
 		return affected == 1;
 	}
 
-    @Transactional(readOnly = false)
-	public boolean update(Category category) {
+    @Transactional
+	public Boolean update(Category category) {
 		// TODO Auto-generated method stub
 		int affected = categoryDao.update(category);
 		return affected == 1;
@@ -56,7 +56,7 @@ public class CategoryServiceImpl implements CategoryService {
     
     @Transactional(readOnly = true)
 	@Override
-	public Collection<Category> getLimit(Integer start) {
+	public List<Category> getLimit(Integer start) {
 		// TODO Auto-generated method stub
 		return categoryDao.selectLimit(start);
 	}

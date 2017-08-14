@@ -7,9 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
 <form method="post" action="/files" enctype="multipart/form-data">
     title : <input type="text" name="title"><br>
     <input type="file" name="file"><br>
+=======
+
+<form method="post" action="/files" enctype="multipart/form-data">
+    title : <input type="text" name="title"><br>
+    <input id='fileid' type="file" name="file" multiple><br>
+>>>>>>> B_SungJiHyun_bb
 
     <input type="submit" value="등록">
 </form>
